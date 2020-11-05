@@ -1,10 +1,10 @@
 ﻿@model CrudMVC.Models.Aluno
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Novo";
 }
 
-<h2>Create</h2>
+<h2>Novo</h2>
 
 
 @using (Html.BeginForm())
@@ -20,7 +20,7 @@
             @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
-                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -74,10 +74,18 @@
     </div>
 }
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <script>
+        $("#Telefone").mask("(99) 99999-9999")
+        document.getElementById("Nome").value = "Aran Wesley";
+
+        $("#Email").val("aran@teste.com.br");
+
+    </script>*@
+}

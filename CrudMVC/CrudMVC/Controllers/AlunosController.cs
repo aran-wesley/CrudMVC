@@ -15,8 +15,21 @@ namespace CrudMVC.Controllers
         private EscolaContext db = new EscolaContext();
 
         // GET: Alunos
-        public ActionResult Index()
+        public ActionResult Index(string busca = null, int opcao = 0)
         {
+            if (busca != null && opcao == 1)
+            {
+                return View(db.Alunos.Where(a => a.Nome.ToUpper().Contains(busca.ToUpper())).ToList());
+            }
+            else if (busca != null && opcao == 2)
+            {
+                return View(db.Alunos.Where(x => x.Endereco.ToUpper().Contains(busca.ToUpper())).ToList());
+            }
+            else if (busca != null && opcao == 3)
+            {
+                return View(db.Alunos.Where(x => x.Telefone.Contains(busca)).ToList());
+            }
+
             return View(db.Alunos.ToList());
         }
 

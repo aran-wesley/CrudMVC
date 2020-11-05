@@ -4,10 +4,29 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Alunos</h2>
+@using (Html.BeginForm("Index", "Alunos", FormMethod.Get, new { @class = "form-inline" }))
+{
+    <input type="text" placeholder="Buscar um ALuno" name="busca" class="form-control" />
+    <input type="submit" class="btn btn-default" value="busca" />
+    <br />
+
+    <input type="radio" id="nome" name="opcao" value="1" />
+    <label for="nome">Por nome:</label>
+
+    <br />
+
+    <input type="radio" id="endereco" name="opcao" value="2" />
+    <label for="endereco">Por endereço:</label>
+
+    <br />
+
+    <input type="radio" id="telefone" name="opcao" value="3" />
+    <label for="telefone">Por telefone:</label>
+}
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar Aluno", "Create")
 </p>
 <table class="table">
     <tr>
@@ -31,33 +50,45 @@
         </th>
         <th></th>
     </tr>
+    @if (Model.Count() != 0)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Endereco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ativo)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Excluir", "Delete", new { id = item.id })
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="7">
+                Registro não encontrado!
+            </td>
+        </tr>
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Endereco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nascimento)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ativo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
-}
 
 </table>
